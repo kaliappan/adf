@@ -17,7 +17,7 @@
 		],
 		"type": "BlobEventsTrigger",
 		"typeProperties": {
-			"blobPathBeginsWith": "/input/blobs/",
+			"blobPathBeginsWith": "/stagingdropzone/blobs/testdir",
 			"blobPathEndsWith": ".dat",
 			"ignoreEmptyBlobs": true,
 			"scope": "/subscriptions/1176e4d8-8a70-46ae-8b96-824c215cc7b7/resourceGroups/kRG/providers/Microsoft.Storage/storageAccounts/kadlsgen2",
