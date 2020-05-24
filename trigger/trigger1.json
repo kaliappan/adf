@@ -1,0 +1,29 @@
+{
+	"name": "trigger1",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pipeline1",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"SourceFolder": "@triggerBody().folderPath",
+					"SourceFile": "@triggerBody().fileName"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/stagingdropzone/blobs/testdir",
+			"blobPathEndsWith": ".dat",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/1176e4d8-8a70-46ae-8b96-824c215cc7b7/resourceGroups/kRG/providers/Microsoft.Storage/storageAccounts/kadlsgen2",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}
