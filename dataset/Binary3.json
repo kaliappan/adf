@@ -10,7 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileSystem": "input"
+				"fileName": "@pipeline().parameters.SourceFile",
+				"fileSystem": "@pipeline().parameters.SourceFolder"
 			}
 		}
 	}
