@@ -78,20 +78,17 @@
 						}
 					},
 					"enableStaging": false,
-					"skipErrorFile": {
-						"fileMissing": true
-					},
 					"validateDataConsistency": false
 				},
 				"inputs": [
 					{
-						"referenceName": "Binary2",
+						"referenceName": "Binary3",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "Binary3",
+						"referenceName": "Binary4",
 						"type": "DatasetReference"
 					}
 				]
