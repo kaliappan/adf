@@ -11,7 +11,7 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": "@pipeline().parameters.SourceFile",
-				"fileSystem": "@pipeline().parameters.SourceFolder"
+				"folderPath": "@pipeline().parameters.SourceFolder"
 			}
 		}
 	}
