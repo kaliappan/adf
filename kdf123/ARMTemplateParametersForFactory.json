@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "kdf123"
+		},
+		"AzureDataLakeStorage2_accountKey": {
+			"value": ""
+		},
+		"AzureDataLakeStorage2_properties_typeProperties_url": {
+			"value": "https://kadlsgen2.dfs.core.windows.net"
+		},
+		"trigger1_properties_pipeline1_parameters_SourceFolder": {
+			"value": "@triggerBody().folderPath"
+		},
+		"trigger1_properties_pipeline1_parameters_SourceFile": {
+			"value": "@triggerBody().fileName"
+		},
+		"trigger1_properties_typeProperties_scope": {
+			"value": "/subscriptions/1176e4d8-8a70-46ae-8b96-824c215cc7b7/resourceGroups/kRG/providers/Microsoft.Storage/storageAccounts/kadlsgen2"
+		}
+	}
+}
