@@ -19,6 +19,15 @@
 		},
 		"trigger1_properties_typeProperties_scope": {
 			"value": "/subscriptions/1176e4d8-8a70-46ae-8b96-824c215cc7b7/resourceGroups/kRG/providers/Microsoft.Storage/storageAccounts/kadlsgen2"
+		},
+		"trigger2_properties_pipeline1_parameters_SourceFolder": {
+			"value": "@triggerBody().folderPath"
+		},
+		"trigger2_properties_pipeline1_parameters_SourceFile": {
+			"value": "@triggerBody().fileName"
+		},
+		"trigger2_properties_typeProperties_scope": {
+			"value": "/subscriptions/1176e4d8-8a70-46ae-8b96-824c215cc7b7/resourceGroups/kRG/providers/Microsoft.Storage/storageAccounts/kadlsgen2"
 		}
 	}
 }
