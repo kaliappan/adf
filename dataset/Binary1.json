@@ -10,8 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "sample-10.dat",
-				"fileSystem": "stagingdropzone"
+				"fileName": "@pipeline().parameters.SourceFile",
+				"fileSystem": "@pipeline().parameters.SourceFolder"
 			}
 		}
 	},
