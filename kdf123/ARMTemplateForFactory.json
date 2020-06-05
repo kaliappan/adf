@@ -45,6 +45,54 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/Send Notification')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Web1",
+						"type": "WebActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://prod-74.eastus.logic.azure.com:443/workflows/fba4f1c78e9a4151b455fd784dad14b7/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=N6r2a1azCAb_sEZ5D5fOmxpvYDklKLBiaxtDDIGbZx0",
+							"method": "POST",
+							"headers": {
+								"Content-Type": "application/json"
+							},
+							"body": {
+								"DataFactoryName": "@{pipeline().DataFactory}",
+								"PipelineName": "@{pipeline().Pipeline}",
+								"Subject": "@{pipeline().parameters.Subject}",
+								"ErrorMessage": "@{pipeline().parameters.ErrorMessage}",
+								"EmailTo": "enterkali2020@gmail.com"
+							}
+						}
+					}
+				],
+				"parameters": {
+					"Subject": {
+						"type": "string",
+						"defaultValue": "No subject set!"
+					},
+					"ErrorMessage": {
+						"type": "string",
+						"defaultValue": "No message set!"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -68,6 +116,9 @@
 								"storeSettings": {
 									"type": "AzureBlobFSReadSettings",
 									"recursive": true
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings"
 								}
 							},
 							"sink": {
@@ -178,6 +229,33 @@
 								"EmailTo": "enterkali2020@gmail.com"
 							}
 						}
+					},
+					{
+						"name": "Send Error Copy",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "Copy data1",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "Send Notification",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {
+								"Subject": "Pipeline finished successfully!",
+								"ErrorMessage": {
+									"value": "@{activity('Copy data1').Error.Message}",
+									"type": "Expression"
+								}
+							}
+						}
 					}
 				],
 				"parameters": {
@@ -194,7 +272,8 @@
 				"[concat(variables('factoryId'), '/datasets/Binary1')]",
 				"[concat(variables('factoryId'), '/datasets/Binary2')]",
 				"[concat(variables('factoryId'), '/datasets/Binary3')]",
-				"[concat(variables('factoryId'), '/datasets/Binary4')]"
+				"[concat(variables('factoryId'), '/datasets/Binary4')]",
+				"[concat(variables('factoryId'), '/pipelines/Send Notification')]"
 			]
 		},
 		{
