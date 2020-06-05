@@ -20,6 +20,9 @@
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
 							"recursive": true
+						},
+						"formatSettings": {
+							"type": "BinaryReadSettings"
 						}
 					},
 					"sink": {
@@ -124,6 +127,33 @@
 						"Subject": "Pipeline Finished!",
 						"ErrorMessage": "Everything is okay-doKey!",
 						"EmailTo": "enterkali2020@gmail.com"
+					}
+				}
+			},
+			{
+				"name": "Execute Pipeline1",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Copy data1",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Send Notification",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"Subject": "Pipeline finished successfully!",
+						"ErrorMessage": {
+							"value": "@{activity('Copy data1').Error.Message}",
+							"type": "Expression"
+						}
 					}
 				}
 			}
