@@ -131,7 +131,7 @@
 				}
 			},
 			{
-				"name": "Execute Pipeline1",
+				"name": "Send Error Copy",
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
